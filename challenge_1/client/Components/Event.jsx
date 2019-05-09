@@ -1,14 +1,16 @@
 import React from "react";
 
 const Event = ({ eventData }) => {
+  if (eventData) {
+    if (eventData.date[0] === "-") {
+      eventData.date = eventData.date.split("-")[1].concat(" BC");
+    }
+  }
   return (
     <div className="Event">
-      <div>{eventData.category1}</div>
-      <div>{eventData.category2}</div>
-      <div>{eventData.date}</div>
-      <div>{eventData.description}</div>
-      <div>{eventData.granularity}</div>
-      <div>{eventData.lang}</div>
+      <div className="Category">{eventData.category2}</div>
+      <div className="Date">{eventData.date}</div>
+      <div className="Desciption">{eventData.description}</div>
     </div>
   )
 }

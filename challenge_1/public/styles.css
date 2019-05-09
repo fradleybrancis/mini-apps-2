@@ -7,3 +7,12 @@
 .Description {
   color: darkslategrey;
 }
+
+.Date {
+  color: darkred;
+  text-decoration: underline;
+}
+
+.Category {
+  font-weight: 900;
+}

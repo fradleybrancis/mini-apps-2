@@ -14,12 +14,15 @@ class SearchBar extends React.Component {
   }
 
   render() {
+    const { updateQuery } = this.props;
+    const { searchWord } = this.state;
     return (
-      <form>
+      <form onSubmit={ (e) => { updateQuery(e, searchWord)}}>
         <label>
-          Search Historical Events: 
+          Search Events: 
           <input type="text" onChange={ this.handleChange }></input>
         </label>
+        <button type="submit">Go!</button>
       </form>
     )
   }

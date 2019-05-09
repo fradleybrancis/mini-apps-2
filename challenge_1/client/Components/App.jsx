@@ -9,14 +9,19 @@ class App extends React.Component {
     this.state = {
       historicalEvents: [],
       query: "",
+      page: 1,
     }
     this.updateQuery = this.updateQuery.bind(this);
+    this.handleNext = this.handleNext.bind(this);
+    this.handlePrevious = this.handlePrevious.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
-  componentDidMount() {
-    axios.get("/events", { 
+  handleSearch() {
+    axios.get("/events", {
       params: {
-        _limit: 25,
+        q: this.state.query,
+        _page: this.state.page,
       }
     })
     .then(response => {
@@ -29,7 +34,19 @@ class App extends React.Component {
 
   updateQuery(event, searchWord) {
     event.preventDefault();
-    this.setState({ query: searchWord });
+    this.setState({ query: searchWord }, this.handleSearch);
+  }
+
+  handlePrevious() {
+    if (this.state.page === 1) {
+      return;
+    } else {
+      this.setState({ page: this.state.page - 1 }, () => this.handleSearch())
+    }
+  }
+
+  handleNext() {
+    this.setState({ page: this.state.page + 1 }, () => this.handleSearch());
   }
 
   render() {
@@ -39,6 +56,10 @@ class App extends React.Component {
         <h1>History Log</h1>
         <SearchBar updateQuery={ this.updateQuery }/>
         <AllEvents historicalEvents={ historicalEvents }/>
+        <div className="pageChange">
+          <button id="previous" type="button" onClick={ this.handlePrevious }>{"<"}</button>
+          <button id="next" type="button" onClick={ this.handleNext }>{">"}</button>
+        </div>
       </div>
     )
   }

@@ -7,15 +7,15 @@ class ScorePad extends React.Component {
       ball: 1,
       frameScore: 0,
     }
+    this.count = 0;
     this.updateFrameScore = this.updateFrameScore.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
     const { updateTotalScore } = this.props;
     const { ball, frameScore } = this.state;
-    if (prevState.ball === 2 || frameScore > 9) {
-      updateTotalScore(frameScore);
-      this.setState({ ball: 1, frameScore: 0})
+    if (ball === 3 || frameScore > 9) {
+      updateTotalScore(frameScore, this.setState({ ball: 1, frameScore: 0 }));
     }
   }
 
@@ -26,12 +26,11 @@ class ScorePad extends React.Component {
     const { ball, frameScore } = this.state;
    
     if (frameScore > 10 || ball > 2) {
-      this.setState({ ball: 1, frameScore: 0 })
+      this.setState({ ball: 1, frameScore: 0 });
     } else if (ball === 1 && value === "10") {
-      this.setState({
-        frameScore: 30,
-        ball: this.state.ball + 1
-      });
+      this.setState({ frameScore: 30 });
+    } else if (ball === 2 && Number(value) + frameScore === 10) {
+      this.setState({ frameScore: frameScore + 10 });
     } else {
       this.setState({ frameScore: frameScore + Number(value), ball: ball + 1 });
     }

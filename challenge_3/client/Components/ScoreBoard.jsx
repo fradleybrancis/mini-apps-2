@@ -1,12 +1,13 @@
 import React from "react";
 
 const ScoreBoard = (props) => {
+  const { frame, score } = props;
   return (
     <React.Fragment>
       <h2>Frame</h2>
-      <div>{props.frame}</div>
+      <div>{frame}</div>
       <h2>Score</h2>
-      <div>{props.score}</div>
+      <div>{score}</div>
     </React.Fragment>
   )
 }

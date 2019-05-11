@@ -1,8 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import App from "./Components/App.jsx";
 
-const Okay = () => {
-  return <div>Hello From ReactVille</div>
-}
-
-ReactDOM.render(<Okay />, document.getElementById("app"));
+ReactDOM.render(<App />, document.getElementById("app"));
